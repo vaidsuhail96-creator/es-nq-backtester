@@ -55,14 +55,14 @@ def backtest(df):
     df["EMA_S"] = df["Close"].ewm(span=ema_slow).mean()
 
     pos = 0
-    entry = 0
+    entry = 0.0
 
     pnl = []
-    equity = [0]
+    equity = [0.0]
 
     for i in range(1, len(df)):
 
-        profit = float((price - entry) * pos)
+        price = float(df["Close"].iloc[i])
 
         if pos == 0:
 
@@ -79,11 +79,12 @@ def backtest(df):
             profit = (price - entry) * pos
 
             if profit >= tp or profit <= -sl:
-                pnl.append(profit)
+                pnl.append(float(profit))
                 equity.append(equity[-1] + profit)
                 pos = 0
 
     return pnl, equity
+
 
 
 if run:
