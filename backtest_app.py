@@ -62,7 +62,7 @@ def backtest(df):
 
     for i in range(1, len(df)):
 
-        price = df["Close"].iloc[i]
+        profit = float((price - entry) * pos)
 
         if pos == 0:
 
